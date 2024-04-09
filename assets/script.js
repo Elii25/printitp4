@@ -31,3 +31,20 @@ rightArrow.addEventListener('click', function(event) {
 	console.log('Clic sur la flèche droite');
 	console.log(event);
 });
+
+// Selectionner le conteneur HTML
+const dotsContaire = document.querySelector('.dots')
+
+// Parcourir le tableau des slider
+for (let i= 0; i < slides.length; i++){
+	//Creer un nouvel element HTML et lui ajouter une class CSS
+	const newDot = document.createElement('span')
+	newDot.classList.add('dot')
+
+	// si c'est le prier, on ajoute une seconde class css
+	if(i===0){
+		newDot.classList.add('dot_selected')
+	}
+	//Ajouter l'element au conteneur
+	dotsContaire.appendChild(newDot)
+}
