@@ -51,45 +51,75 @@ for (let i= 0; i < slides.length; i++){
 
 //Modifier le slide au clic sur un bouton
 document.addEventListener("DOMContentLoaded", function() {
-	const slides = document.querySelectorAll(".slides");
-	const prevBtn = document.getElementById("prevBtn");
-	const nextBtn = document.getElementById("nextBtn");
+	const leftArrow = document.getElementById("arrow_left");
+	const rightArrow = document.getElementById("arrow_right");
 	const tagLines = ["Impressions tous formats <span>en boutique et en ligne", "Tirages haute définition grand format <span>pour vos bureaux et events", "Grand choix de couleurs <span>de CMJN aux pantones", "Autocollants <span>avec découpe laser sur mesure"];
 	let currentSlide = 0;
   
-	function showSlide(index) {
-	  slides.forEach((slide, i) => {
-		if (i === index) {
-		  slide.style.display = "block";
-		} else {
-		  slide.style.display = "none";
-		}
-	  });
-	}
   
 	function changeSlide(direction) {
 	  if (direction === "next") {
-		currentSlide = (currentSlide + 1) % slides.length;
+		currentSlide = currentSlide + 1;
 	  } else {
-		currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+		currentSlide = currentSlide - 1;
 	  }
-	  const imagePath = "image" + (currentSlide + 1) + ".jpg"; // Construire le chemin de la nouvelle image
-	  const tagLine = tagLines[currentSlide];
-	  const currentImage = slides[currentSlide].querySelector("img");
-	  const tagLineElement = slides[currentSlide].querySelector("p");
-	  currentImage.src = imagePath; // Changer l'image
-	  tagLineElement.innerHTML = tagLine; // Insérer le texte
-	  showSlide(currentSlide);
+	  const imagePath = slides[currentSlide].image;
+	  const tagLine = slides[currentSlide].tagLine;
+	  
+	   
+	  document.getElementById("slides").src = slides[direction];
 	}
   
-	prevBtn.addEventListener("click", function() {
+	arrow_left.addEventListener("click", function() {
 	  changeSlide("prev");
 	});
   
-	nextBtn.addEventListener("click", function() {
+	arrow_right.addEventListener("click", function() {
 	  changeSlide("next");
 	});
   
-	showSlide(currentSlide);
+	showSlide(currentSlides);
   });
   
+  // Sélection des éléments du carousel
+const carousel = document.querySelector('.carousel');
+const images = document.querySelectorAll('.carousel img');
+const points = document.querySelectorAll('.carousel .point');
+const text = document.querySelector('.carousel .text');
+
+// Initialisation de l'index de l'image actuellement affichée
+let currentIndex = 0;
+
+// Fonction pour afficher l'image suivante
+function showNextImage() {
+    // Masquer l'image actuelle
+    images[currentIndex].classList.remove('visible');
+    points[currentIndex].classList.remove('selected');
+    
+    // Passage à l'index suivant
+    currentIndex = (currentIndex + 1) % images.length;
+    
+    // Afficher la nouvelle image
+    images[currentIndex].classList.add('visible');
+    points[currentIndex].classList.add('selected');
+    
+    // Mettre à jour le texte en accord avec l'image montrée
+    text.textContent = images[currentIndex].getAttribute('alt');
+}
+
+//mettez en place le defilement infini sur le carouse
+
+function showPreviousImage() {
+
+    images[currentIndex].classList.remove('visible');
+    points[currentIndex].classList.remove('selected');
+    
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    
+    images[currentIndex].classList.add('visible');
+    points[currentIndex].classList.add('selected');
+    
+    text.textContent = images[currentIndex].getAttribute('alt');
+}
+
+
