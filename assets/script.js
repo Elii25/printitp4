@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	  const tagLine = slides[currentSlide].tagLine;
 	  
 	   
-	  document.getElementById("slides").src = slides[direction];
+	  document.querySelector(".banner-img").src='assets/images/slideshow/' + slides[currentSlide].image;
 	}
   
 	arrow_left.addEventListener("click", function() {
@@ -78,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	  changeSlide("next");
 	});
   
-	showSlide(currentSlides);
   });
   
   // Sélection des éléments du carousel
